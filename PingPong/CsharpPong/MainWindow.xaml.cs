@@ -24,5 +24,22 @@ namespace CsharpPong
         {
             InitializeComponent();
         }
+
+        //Key presses
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Left:
+                case Key.D:
+
+                    break;
+
+                case Key.Return:
+                case Key.A:
+
+                    break;
+            }
+        }
     }
 }
