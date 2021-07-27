@@ -25,7 +25,7 @@ namespace CsharpPong
         {
             if (isColliding) ChangeDirection();
             var newLeftMargin = VisualRectangle.Margin.Left + Direction["leftMargin"];
-            double newTopMargin = VisualRectangle.Margin.Top + Direction["topMargin"];
+            var newTopMargin = VisualRectangle.Margin.Top + Direction["topMargin"];
             VisualRectangle.Margin = new Thickness(newLeftMargin, newTopMargin, VisualRectangle.Margin.Right, VisualRectangle.Margin.Bottom);
            
         }
