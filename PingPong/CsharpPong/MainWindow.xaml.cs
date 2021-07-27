@@ -23,11 +23,20 @@ namespace CsharpPong
         //Classes
         private Paddle paddle;
 
+        //Variables
+        private int level;
+        private int score;
+
+
 
         public MainWindow()
         {
             InitializeComponent();
             paddle = new Paddle(this, PaddleVisual);
+
+            level = 1;
+            score = 0;
+            updateOnScreenInfo();
         }
 
         //Key presses
@@ -45,6 +54,39 @@ namespace CsharpPong
                     paddle.Move("right");
                     break;
             }
+        }
+
+        // On screen stuff
+        private void updateOnScreenInfo()
+        {
+            //first update the level
+            updateLevel();
+
+            updateScore();
+        }
+
+        private void updateLevel()
+        {
+            switch (level)
+            {
+                case 0:
+                    LevelVisual.Text = "hacker";
+                    break;
+                case 1:
+                    LevelVisual.Text = "easy";
+                    break;
+                case 2:
+                    LevelVisual.Text = "medium";
+                    break;
+                case 3:
+                    LevelVisual.Text = "intermediate";
+                    break;
+            }
+        }
+
+        private void updateScore()
+        {
+            ScoreVisual.Text = score.ToString();
         }
     }
 }
