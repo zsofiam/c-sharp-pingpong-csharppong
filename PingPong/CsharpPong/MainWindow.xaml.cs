@@ -39,6 +39,7 @@ namespace CsharpPong
             updateOnScreenInfo();
         }
 
+        //Window stuff
         //Key presses
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
@@ -54,6 +55,10 @@ namespace CsharpPong
                     paddle.Move("right");
                     break;
             }
+        }
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ProgressVisual.Width = this.ActualWidth;
         }
 
         // On screen stuff
@@ -88,5 +93,7 @@ namespace CsharpPong
         {
             ScoreVisual.Text = score.ToString();
         }
+
+        
     }
 }
