@@ -20,7 +20,9 @@ namespace CsharpPong
     /// </summary>
     public partial class MainWindow : Window
     {
+        //Classes
         private Paddle paddle;
+
 
         public MainWindow()
         {
