@@ -61,8 +61,8 @@ namespace CsharpPong
         private LevelInfo[] levels;
         private bool inGame = true;
         private bool isPaused = false;
-        private int level;
-        private int score;
+        private int level = 1;
+        private int score = 0;
 
         private DispatcherTimer playTimer = new DispatcherTimer();
         private int timeSpent = 0;
@@ -76,10 +76,8 @@ namespace CsharpPong
             levels = new LevelInfo[4];
             createLevelData();
 
-            level = 1;
-            score = 0;
             initLevelText();
-            initProgressBar();
+            initProgressBars();
             updateOnScreenInfo();
         }
 
@@ -120,13 +118,14 @@ namespace CsharpPong
         }
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            ProgressVisual.Width = this.ActualWidth;
+            ScoreProgressVisual.Width = this.ActualWidth;
         }
         private void PlayTimer_Tick(object sender, EventArgs e)
         {
             timeSpent++;
+            updateProgressBars();
 
-            if (!(timeSpent >= 10)) return;
+            if (!(timeSpent >= levels[level].getMaxTime())) return;
 
             playTimer.Stop();
             pause();
@@ -140,16 +139,17 @@ namespace CsharpPong
             LevelVisual.Text = levels[level].getName();
         }
 
-        private void initProgressBar()
+        private void initProgressBars()
         {
-            ProgressVisual.Maximum = levels[level].getRequiredScore();
+            ScoreProgressVisual.Maximum = levels[level].getRequiredScore();
+            TimeProgressVisual.Maximum = levels[level].getMaxTime();
         }
 
         private void updateOnScreenInfo()
         {
             updateScore();
 
-            updateProgressBar();
+            updateProgressBars();
         }
 
         private void updateScore()
@@ -157,9 +157,10 @@ namespace CsharpPong
             ScoreVisual.Text = score.ToString();
         }
 
-        private void updateProgressBar()
+        private void updateProgressBars()
         {
-            ProgressVisual.Value = score;
+            ScoreProgressVisual.Value = score;
+            TimeProgressVisual.Value = timeSpent;
         }
 
         //Actual game control
@@ -170,7 +171,7 @@ namespace CsharpPong
             this.level = level;
 
             initLevelText();
-            initProgressBar();
+            initProgressBars();
             updateOnScreenInfo();
 
             //Start timer
