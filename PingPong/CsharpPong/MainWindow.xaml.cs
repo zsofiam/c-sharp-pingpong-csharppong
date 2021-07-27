@@ -43,9 +43,25 @@ namespace CsharpPong
                     paddle.Move("right");
                     break;
                 case Key.Escape:
-                    Application.Current.Shutdown();
+                    HandleEscKey();
                     break;
             }
+        }
+
+        private void HandleEscKey()
+        {
+            //should pause game
+            PopUpMenu.Visibility = Visibility.Visible;
+        }
+
+        private void YesButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void NoButton_Click(object sender, RoutedEventArgs e)
+        {
+            PopUpMenu.Visibility = Visibility.Hidden;
         }
     }
 }
