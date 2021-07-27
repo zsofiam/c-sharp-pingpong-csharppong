@@ -58,6 +58,7 @@ namespace CsharpPong
         private int score;
 
         private DispatcherTimer playTimer = new DispatcherTimer();
+        private int timeSpent = 0;
 
 
         public MainWindow()
@@ -114,6 +115,17 @@ namespace CsharpPong
         {
             ProgressVisual.Width = this.ActualWidth;
         }
+        private void PlayTimer_Tick(object sender, EventArgs e)
+        {
+            timeSpent++;
+
+            if (!(timeSpent >= 10)) return;
+
+            playTimer.Stop();
+            pause();
+
+            if (DEBUG) MessageBox.Show("DEBUG: 180 secs over");
+        }
 
         // On screen stuff
         private void initLevelText()
@@ -146,11 +158,18 @@ namespace CsharpPong
         //Actual game control
         private void play(int level)
         {
+            stop();
+
             this.level = level;
 
             initLevelText();
             initProgressBar();
             updateOnScreenInfo();
+
+            //Start timer
+            playTimer.Interval = new TimeSpan(0, 0, 1);
+            playTimer.Tick += PlayTimer_Tick;
+            playTimer.Start();
 
             inGame = true;
             isPaused = false;
@@ -158,16 +177,19 @@ namespace CsharpPong
 
         private void pause()
         {
+            playTimer.Tick -= PlayTimer_Tick;
             isPaused = true;
         }
 
         private void resume()
         {
+            playTimer.Tick += PlayTimer_Tick;
             isPaused = false;
         }
 
         private void stop()
         {
+            playTimer.Tick -= PlayTimer_Tick;
             inGame = false;
             isPaused = false;
         }
