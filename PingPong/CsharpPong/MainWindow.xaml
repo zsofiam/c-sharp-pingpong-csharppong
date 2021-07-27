@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CsharpPong"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="SharPong" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="img/bg.jpg"/>
+        </Grid.Background>
+
+        <Rectangle x:Name="Paddle" HorizontalAlignment="Center" Height="25" Margin="0,0,0,20" VerticalAlignment="Bottom" Width="200">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="img/paddle.png"/>
+            </Rectangle.Fill>
+
+        </Rectangle>
     </Grid>
 </Window>
