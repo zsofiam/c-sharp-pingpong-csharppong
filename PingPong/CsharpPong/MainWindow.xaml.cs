@@ -152,7 +152,7 @@ namespace CsharpPong
 
             updateProgressBars();
         }
-
+        //CALL THIS ONCE SCORES CHANGE
         private void updateScore()
         {
             ScoreVisual.Text = score.ToString();
