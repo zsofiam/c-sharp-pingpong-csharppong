@@ -42,6 +42,9 @@ namespace CsharpPong
                 case Key.D:
                     paddle.Move("right");
                     break;
+                case Key.Escape:
+                    Application.Current.Shutdown();
+                    break;
             }
         }
     }
