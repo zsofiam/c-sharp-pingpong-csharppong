@@ -20,9 +20,29 @@ namespace CsharpPong
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Paddle paddle;
+
         public MainWindow()
         {
             InitializeComponent();
+            paddle = new Paddle(this, PaddleVisual);
+        }
+
+        //Key presses
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Left:
+                case Key.A:
+                    paddle.Move("left");
+                    break;
+
+                case Key.Right:
+                case Key.D:
+                    paddle.Move("right");
+                    break;
+            }
         }
     }
 }
