@@ -58,7 +58,7 @@ namespace CsharpPong
             InitializeComponent();
             paddle = new Paddle(this, PaddleVisual);
 
-            levels = new LevelInfo[3];
+            levels = new LevelInfo[4];
             createLevelData();
 
             level = 1;
