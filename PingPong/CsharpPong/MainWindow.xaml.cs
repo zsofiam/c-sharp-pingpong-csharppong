@@ -119,6 +119,7 @@ namespace CsharpPong
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ScoreProgressVisual.Width = this.ActualWidth;
+            TimeProgressVisual.Width = this.ActualWidth;
         }
         private void PlayTimer_Tick(object sender, EventArgs e)
         {
