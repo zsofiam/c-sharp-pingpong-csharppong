@@ -44,6 +44,9 @@ namespace CsharpPong
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool DEBUG = true;
+
+
         //Classes
         private Paddle paddle;
 
@@ -88,6 +91,21 @@ namespace CsharpPong
                     case Key.Right:
                     case Key.D:
                         paddle.Move("right");
+                        break;
+
+
+                    case Key.NumPad0:
+                        if (DEBUG) play(0);
+                        break;
+                    case Key.NumPad1:
+                        if (DEBUG) play(1);
+                        break;
+
+                    case Key.NumPad2:
+                        if (DEBUG) play(2);
+                        break;
+                    case Key.NumPad3:
+                        if (DEBUG) play(3);
                         break;
                 }
             }
