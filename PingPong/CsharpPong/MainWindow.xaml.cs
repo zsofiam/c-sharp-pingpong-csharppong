@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace CsharpPong
 {
@@ -20,12 +21,24 @@ namespace CsharpPong
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Paddle paddle;
+        private Paddle _paddle;
+        private Ball _ball;
 
         public MainWindow()
         {
             InitializeComponent();
-            paddle = new Paddle(this, PaddleVisual);
+            _paddle = new Paddle(this, PaddleVisual);
+            _ball = new Ball(this, BallVisual);
+            _ball.SetDirection();
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 30);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            _ball.Move();
         }
 
         //Key presses
@@ -35,12 +48,12 @@ namespace CsharpPong
             {
                 case Key.Left:
                 case Key.A:
-                    paddle.Move("left");
+                    _paddle.Move("left");
                     break;
 
                 case Key.Right:
                 case Key.D:
-                    paddle.Move("right");
+                    _paddle.Move("right");
                     break;
             }
         }
