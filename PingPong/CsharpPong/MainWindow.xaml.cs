@@ -21,11 +21,13 @@ namespace CsharpPong
     {
         private string name;
         private int requiredScore;
+        private int maxTime;
 
-        public LevelInfo(string name, int requiredScore)
+        public LevelInfo(string name, int requiredScore, int maxTime)
         {
             this.name = name;
             this.requiredScore = requiredScore;
+            this.maxTime = maxTime;
         }
 
         public string getName()
@@ -36,6 +38,11 @@ namespace CsharpPong
         public int getRequiredScore()
         {
             return requiredScore;
+        }
+
+        public int getMaxTime()
+        {
+            return maxTime;
         }
     }
 
@@ -124,7 +131,7 @@ namespace CsharpPong
             playTimer.Stop();
             pause();
 
-            if (DEBUG) MessageBox.Show("DEBUG: 180 secs over");
+            if (DEBUG) MessageBox.Show("DEBUG: secs over");
         }
 
         // On screen stuff
@@ -198,10 +205,10 @@ namespace CsharpPong
             //This one is dummy/prototype level code, focus on later moving this to like a config file!!!
         private void createLevelData()
         {
-            LevelInfo easy = new LevelInfo("easy", 5);
-            LevelInfo medium = new LevelInfo("medium", 10);
-            LevelInfo intermediate = new LevelInfo("intermediate", 20);
-            LevelInfo hacker = new LevelInfo("hacker", 50);
+            LevelInfo easy = new LevelInfo("easy", 5, 180);
+            LevelInfo medium = new LevelInfo("medium", 10, 150);
+            LevelInfo intermediate = new LevelInfo("intermediate", 20, 130);
+            LevelInfo hacker = new LevelInfo("hacker", 50, 100);
 
             levels[0] = hacker;
             levels[1] = easy;
