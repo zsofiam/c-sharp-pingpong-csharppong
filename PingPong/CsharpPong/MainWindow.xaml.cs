@@ -15,6 +15,28 @@ using System.Windows.Shapes;
 
 namespace CsharpPong
 {
+    struct LevelInfo
+    {
+        private string name;
+        private int requiredScore;
+
+        public LevelInfo(string name, int requiredScore)
+        {
+            this.name = name;
+            this.requiredScore = requiredScore;
+        }
+
+        public string getName()
+        {
+            return name;
+        }
+
+        public int getRequiredScore()
+        {
+            return requiredScore;
+        }
+    }
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
