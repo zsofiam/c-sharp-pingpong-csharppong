@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace CsharpPong
 {
@@ -48,9 +49,12 @@ namespace CsharpPong
 
         //Variables
         private LevelInfo[] levels;
+        private bool inGame = true;
+        private bool isPaused = false;
         private int level;
         private int score;
 
+        private DispatcherTimer playTimer = new DispatcherTimer();
 
 
         public MainWindow()
@@ -72,17 +76,20 @@ namespace CsharpPong
         //Key presses
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.Key)
+            if (inGame && !isPaused)
             {
-                case Key.Left:
-                case Key.A:
-                    paddle.Move("left");
-                    break;
+                switch (e.Key)
+                {
+                    case Key.Left:
+                    case Key.A:
+                        paddle.Move("left");
+                        break;
 
-                case Key.Right:
-                case Key.D:
-                    paddle.Move("right");
-                    break;
+                    case Key.Right:
+                    case Key.D:
+                        paddle.Move("right");
+                        break;
+                }
             }
         }
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -116,6 +123,35 @@ namespace CsharpPong
         private void updateProgressBar()
         {
             ProgressVisual.Value = score;
+        }
+
+        //Actual game control
+        private void play(int level)
+        {
+            this.level = level;
+
+            initLevelText();
+            initProgressBar();
+            updateOnScreenInfo();
+
+            inGame = true;
+            isPaused = false;
+        }
+
+        private void pause()
+        {
+            isPaused = true;
+        }
+
+        private void resume()
+        {
+            isPaused = false;
+        }
+
+        private void stop()
+        {
+            inGame = false;
+            isPaused = false;
         }
 
         // Other and things that could get outsourced or have some debuggy purpose
