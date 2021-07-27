@@ -20,9 +20,12 @@ namespace CsharpPong
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Paddle paddle;
+
         public MainWindow()
         {
             InitializeComponent();
+            paddle = new Paddle(this, PaddleVisual);
         }
 
         //Key presses
@@ -31,13 +34,13 @@ namespace CsharpPong
             switch (e.Key)
             {
                 case Key.Left:
-                case Key.D:
-
+                case Key.A:
+                    paddle.Move("left");
                     break;
 
-                case Key.Return:
-                case Key.A:
-
+                case Key.Right:
+                case Key.D:
+                    paddle.Move("right");
                     break;
             }
         }

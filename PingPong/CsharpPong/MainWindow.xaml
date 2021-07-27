@@ -11,7 +11,7 @@
             <ImageBrush ImageSource="img/bg.jpg"/>
         </Grid.Background>
 
-        <Rectangle x:Name="Paddle" HorizontalAlignment="Center" Height="25" Margin="0,0,0,20" VerticalAlignment="Bottom" Width="200">
+        <Rectangle x:Name="PaddleVisual" HorizontalAlignment="Center" Height="25" Margin="0,0,0,20" VerticalAlignment="Bottom" Width="200">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="img/paddle.png"/>
             </Rectangle.Fill>
