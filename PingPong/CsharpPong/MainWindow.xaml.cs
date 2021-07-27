@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 namespace CsharpPong
 {
+    // This needs some other info like ball speed and stuff
     struct LevelInfo
     {
         private string name;
@@ -46,6 +47,7 @@ namespace CsharpPong
         private Paddle paddle;
 
         //Variables
+        private LevelInfo[] levels;
         private int level;
         private int score;
 
@@ -56,8 +58,12 @@ namespace CsharpPong
             InitializeComponent();
             paddle = new Paddle(this, PaddleVisual);
 
+            levels = new LevelInfo[3];
+            createLevelData();
+
             level = 1;
             score = 0;
+            initProgressBar();
             updateOnScreenInfo();
         }
 
@@ -90,6 +96,8 @@ namespace CsharpPong
             updateLevel();
 
             updateScore();
+
+            updateProgressBar();
         }
 
         private void updateLevel()
@@ -116,6 +124,29 @@ namespace CsharpPong
             ScoreVisual.Text = score.ToString();
         }
 
-        
+        private void initProgressBar()
+        {
+            ProgressVisual.Maximum = levels[level].getRequiredScore();
+        }
+
+        private void updateProgressBar()
+        {
+            ProgressVisual.Value = score;
+        }
+
+        // Other and things that could get outsourced or have some debuggy purpose
+            //This one is dummy/prototype level code, focus on later moving this to like a config file!!!
+        private void createLevelData()
+        {
+            LevelInfo easy = new LevelInfo("easy", 5);
+            LevelInfo medium = new LevelInfo("medium", 10);
+            LevelInfo intermediate = new LevelInfo("intermediate", 20);
+            LevelInfo hacker = new LevelInfo("hacker", 50);
+
+            levels[0] = hacker;
+            levels[1] = easy;
+            levels[2] = medium;
+            levels[3] = intermediate;
+        }
     }
 }
