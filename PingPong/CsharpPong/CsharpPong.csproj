@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Ball.cs" />
     <Compile Include="Paddle.cs" />
     <Compile Include="Rectangle.cs" />
     <Page Include="MainWindow.xaml">
@@ -101,6 +102,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\paddle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\ball.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
