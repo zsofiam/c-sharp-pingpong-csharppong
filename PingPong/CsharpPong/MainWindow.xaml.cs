@@ -63,6 +63,7 @@ namespace CsharpPong
 
             level = 1;
             score = 0;
+            initLevelText();
             initProgressBar();
             updateOnScreenInfo();
         }
@@ -90,43 +91,26 @@ namespace CsharpPong
         }
 
         // On screen stuff
-        private void updateOnScreenInfo()
+        private void initLevelText()
         {
-            //first update the level
-            updateLevel();
-
-            updateScore();
-
-            updateProgressBar();
-        }
-
-        private void updateLevel()
-        {
-            switch (level)
-            {
-                case 0:
-                    LevelVisual.Text = "hacker";
-                    break;
-                case 1:
-                    LevelVisual.Text = "easy";
-                    break;
-                case 2:
-                    LevelVisual.Text = "medium";
-                    break;
-                case 3:
-                    LevelVisual.Text = "intermediate";
-                    break;
-            }
-        }
-
-        private void updateScore()
-        {
-            ScoreVisual.Text = score.ToString();
+            LevelVisual.Text = levels[level].getName();
         }
 
         private void initProgressBar()
         {
             ProgressVisual.Maximum = levels[level].getRequiredScore();
+        }
+
+        private void updateOnScreenInfo()
+        {
+            updateScore();
+
+            updateProgressBar();
+        }
+
+        private void updateScore()
+        {
+            ScoreVisual.Text = score.ToString();
         }
 
         private void updateProgressBar()
