@@ -53,9 +53,9 @@ namespace CsharpPong
     {
         private bool DEBUG = true;
 
-
         //Classes
         private Paddle paddle;
+        private Ball ball;
 
         //Variables
         private LevelInfo[] levels;
@@ -72,7 +72,7 @@ namespace CsharpPong
         {
             InitializeComponent();
             paddle = new Paddle(this, PaddleVisual);
-
+            ball = new Ball(this, BallVisual);
             levels = new LevelInfo[4];
             createLevelData();
 
@@ -136,7 +136,7 @@ namespace CsharpPong
         {
             timeSpent++;
             updateProgressBars();
-
+            ball.Move();
             if (!(timeSpent >= levels[level].getMaxTime())) return;
 
             playTimer.Stop();
@@ -192,7 +192,7 @@ namespace CsharpPong
         private void play(int level)
         {
             stop();
-
+            ball.SetDirection();
             this.level = level;
 
             initLevelText();
