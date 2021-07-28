@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CsharpPong"
         mc:Ignorable="d"
-        Title="SharPong" Height="450" Width="800" ResizeMode="NoResize" KeyDown="Window_KeyDown">
-    <Grid>
+        Title="SharPong" Height="450" Width="800" KeyDown="Window_KeyDown" SizeChanged="Window_SizeChanged">
+    <Grid Margin="0,0,-0.4,0">
         <Grid.Background>
             <ImageBrush ImageSource="img/bg.jpg"/>
         </Grid.Background>
@@ -17,5 +17,13 @@
             </Rectangle.Fill>
 
         </Rectangle>
+        <TextBlock x:Name="LevelVisual" HorizontalAlignment="Right" Margin="0,6,19,0" TextWrapping="Wrap" Text="easy" VerticalAlignment="Top" Height="31" Width="250" Foreground="White" FontSize="24" TextDecorations="{x:Null}" FontFamily="Segoe UI Light" TextAlignment="Right"/>
+        <TextBlock HorizontalAlignment="Right" Margin="0,37,19,0" TextWrapping="Wrap" Text="Level" VerticalAlignment="Top" Height="15" Width="28" Foreground="White" FontSize="12" TextDecorations="{x:Null}" FontFamily="Segoe UI Light"/>
+
+        <TextBlock x:Name="ScoreVisual" HorizontalAlignment="Left" Margin="10,6,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="50" Width="130" Foreground="White" FontSize="42" TextDecorations="{x:Null}" FontFamily="Segoe UI Light"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,56,0,0" TextWrapping="Wrap" Text="Score" VerticalAlignment="Top" Height="15" Width="28" Foreground="White" FontSize="12" TextDecorations="{x:Null}" FontFamily="Segoe UI Light"/>
+
+        <ProgressBar x:Name="ProgressVisual" HorizontalAlignment="Center" Height="10" Margin="0,408,0,-3" VerticalAlignment="Bottom" Width="794" Foreground="#CC4ADBEB" BorderBrush="{x:Null}" Background="#CEE6E6E6" LargeChange="0"/>
+
     </Grid>
 </Window>
