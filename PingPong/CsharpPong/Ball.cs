@@ -59,8 +59,7 @@ namespace CsharpPong
 
         public void ChangeDirection()
         {
-            Direction["leftMargin"] = Random.NextDouble() + 0.1 - 1 * Direction["leftMargin"];
-            Direction["topMargin"] = (Random.NextDouble() + 0.1) * 10 * _level;
+            
         }
     }
 }
