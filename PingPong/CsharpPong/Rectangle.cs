@@ -6,40 +6,53 @@ using System.Windows.Shapes;
 
 namespace CsharpPong
 {
-    class Rectangle : Shape
+    public class Rectangle : Shape
     {
         protected MainWindow MainWindow;
         protected System.Windows.Shapes.Rectangle VisualRectangle;
         protected Dictionary<string, double> Direction = new Dictionary<string, double>();
         protected Random Random = new Random();
-        private int _level = 1;
-        protected bool isColliding = false;
+        protected int level = 1;
+        protected double lMargin;
+        protected double tMargin;
+        protected double rMargin;
+        protected double bMargin;
 
         public Rectangle(MainWindow mainWindow, System.Windows.Shapes.Rectangle visualRectangle)
         {
             MainWindow = mainWindow;
             VisualRectangle = visualRectangle;
+            lMargin = VisualRectangle.Margin.Left;
+            tMargin = VisualRectangle.Margin.Top;
+            rMargin = VisualRectangle.Margin.Right;
+            bMargin = VisualRectangle.Margin.Bottom;
+        }
+
+        protected void ChangeMargin()
+        {
+            lMargin += Direction["leftMargin"];
+            rMargin -= Direction["leftMargin"];
+            tMargin += Direction["topMargin"];
+            bMargin -= Direction["topMargin"];
+            
         }
 
         public void Move()
         {
-            if (isColliding) ChangeDirection();
-            var newLeftMargin = VisualRectangle.Margin.Left + Direction["leftMargin"];
-            var newTopMargin = VisualRectangle.Margin.Top + Direction["topMargin"];
-            VisualRectangle.Margin = new Thickness(newLeftMargin, newTopMargin, VisualRectangle.Margin.Right, VisualRectangle.Margin.Bottom);
-
+            ChangeMargin();
+            VisualRectangle.Margin = new Thickness(lMargin, tMargin, rMargin, bMargin);
         }
 
         public void SetDirection()
         {
-            Direction["leftMargin"] = Random.Next(-1, 2) * 10 * _level;
-            Direction["topMargin"] = 10 * _level;
+            Direction["leftMargin"] = Random.Next(-1, 2) * 10 * level;
+            Direction["topMargin"] = 10 * level;
         }
 
         public void ChangeDirection()
         {
-            Direction["leftMargin"] = Random.Next(-1, 2) * 10 * _level;
-            Direction["topMargin"] = 10 * _level;
+            Direction["leftMargin"] = Random.Next(-1, 2) * 10 * level;
+            Direction["topMargin"] = 10 * level;
         }
 
 

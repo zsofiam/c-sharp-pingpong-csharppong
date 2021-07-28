@@ -9,32 +9,14 @@ namespace CsharpPong
 {
     public class Ball : Rectangle
     {
-        private MainWindow MainWindow;
-        private System.Windows.Shapes.Rectangle VisualRectangle;
-
-        protected Dictionary<string, double> Direction = new Dictionary<string, double>();
-        protected Random Random = new Random();
-        private int _level = 1;
-        private double lMargin;
-        private double tMargin;
-        private double rMargin;
-        private double bMargin;
 
         public Ball(MainWindow mainWindow, System.Windows.Shapes.Rectangle visualRectangle) : base(mainWindow, visualRectangle)
         {
-            MainWindow = mainWindow;
-            VisualRectangle = visualRectangle;
-            lMargin = VisualRectangle.Margin.Left;
-            tMargin = VisualRectangle.Margin.Top;
-            rMargin = VisualRectangle.Margin.Right;
-            bMargin = VisualRectangle.Margin.Bottom;
+
         }
-        public void Move()
+        public new void Move()
         {
-            lMargin += Direction["leftMargin"];
-            rMargin -= Direction["leftMargin"];
-            tMargin += Direction["topMargin"];
-            bMargin -= Direction["topMargin"];
+            ChangeMargin();
             VisualRectangle.Margin = new Thickness(lMargin, tMargin, rMargin, bMargin);
             if (lMargin <= 0 || tMargin <= 0 || rMargin <= 0 || bMargin <= 0)
             {
@@ -44,7 +26,7 @@ namespace CsharpPong
 
         private void Bounce()
         {
-            if(bMargin <= 0 || tMargin <= 0)
+            if (bMargin <= 0 || tMargin <= 0)
             {
                 Direction["topMargin"] = -1 * Direction["topMargin"];
             }
@@ -55,13 +37,13 @@ namespace CsharpPong
 
         }
 
-        public void SetDirection()
+        public new void SetDirection()
         {
-            Direction["leftMargin"] = 10 * _level;
-            Direction["topMargin"] = 20 * _level;
+            Direction["leftMargin"] = 10 * level;
+            Direction["topMargin"] = 20 * level;
         }
 
-        public void ChangeDirection()
+        public new void ChangeDirection()
         {
             
         }
