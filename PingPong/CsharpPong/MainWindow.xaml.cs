@@ -87,35 +87,43 @@ namespace CsharpPong
         {
             if (inGame && !isPaused)
             {
-                switch (e.Key)
-                {
-                    case Key.Left:
-                    case Key.A:
+                case Key.Left:
+                case Key.A:
                         paddle.Move("left");
                         break;
 
-                    case Key.Right:
-                    case Key.D:
+                case Key.Right:
+                case Key.D:
                         paddle.Move("right");
                         break;
 
 
-                    case Key.NumPad0:
+               case Key.NumPad0:
                         if (DEBUG) play(0);
                         break;
-                    case Key.NumPad1:
+               case Key.NumPad1:
                         if (DEBUG) play(1);
                         break;
 
-                    case Key.NumPad2:
+               case Key.NumPad2:
                         if (DEBUG) play(2);
                         break;
-                    case Key.NumPad3:
+               case Key.NumPad3:
                         if (DEBUG) play(3);
                         break;
-                }
+                        
+                case Key.Escape:
+                    HandleEscKey();
+                    break;
             }
         }
+
+        private void HandleEscKey()
+        {
+            //should pause game
+            PopUpMenu.Visibility = Visibility.Visible;
+        }
+        
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ScoreProgressVisual.Width = this.ActualWidth;
@@ -133,6 +141,9 @@ namespace CsharpPong
 
             if (DEBUG) MessageBox.Show("DEBUG: secs over");
         }
+
+        
+        
 
         // On screen stuff
         private void initLevelText()
@@ -162,6 +173,16 @@ namespace CsharpPong
         {
             ScoreProgressVisual.Value = score;
             TimeProgressVisual.Value = timeSpent;
+        }
+        
+        private void YesButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void NoButton_Click(object sender, RoutedEventArgs e)
+        {
+            PopUpMenu.Visibility = Visibility.Hidden;
         }
 
         //Actual game control
