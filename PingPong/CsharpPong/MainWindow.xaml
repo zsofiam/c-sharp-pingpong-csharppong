@@ -5,23 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CsharpPong"
         mc:Ignorable="d"
-        Title="SharPong" Height="450" Width="800" ResizeMode="NoResize" KeyDown="Window_KeyDown">
-    <Grid>
+        Title="SharPong" Height="450" Width="800" KeyDown="Window_KeyDown" SizeChanged="Window_SizeChanged">
+    <Grid Margin="0,0,-0.4,0">
         <Grid.Background>
             <ImageBrush ImageSource="img/bg.jpg"/>
         </Grid.Background>
-        <Grid>
-            <Label Name="timeLabel" FontSize="48" Margin="730,54,30,360"/>
+        <Grid x:Name="PopUpMenu" HorizontalAlignment="Center" Height="100"  VerticalAlignment="Center" Width="300" Visibility="Hidden" Grid.Column="1" Opacity="0.85" Background="#8ed0e8">
+            <Label Content="Are you sure to quit from the best game ever?" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Margin="0"/>
+            <Button x:Name="YesButton" Content="Yes" RenderTransformOrigin="1,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="50,0,0,10" Click="YesButton_Click" Width="70" Height="20"/>
+            <Button x:Name="NoButton" Content="Hell NO" RenderTransformOrigin="1,10"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,50,10" Click="NoButton_Click" Width="70" Height="20"/>
         </Grid>
         <Rectangle x:Name="PaddleVisual" HorizontalAlignment="Center" Height="25" Margin="0,0,0,20" VerticalAlignment="Bottom" Width="200">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="img/paddle.png"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Rectangle x:Name="BallVisual" HorizontalAlignment="Center" Height="50" Margin="374,10,369.6,360" RadiusX="25" RadiusY="25" Width="50">
+        <Rectangle x:Name="BallVisual" HorizontalAlignment="Center" Height="50" Margin="365,10,370,350"  Width="50" StrokeThickness="0" RadiusX="25" RadiusY="25">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="img/ball.png"/>
             </Rectangle.Fill>
         </Rectangle>
+        <TextBlock x:Name="LevelVisual" HorizontalAlignment="Right" Margin="0,6,19,0" TextWrapping="Wrap" Text="easy" VerticalAlignment="Top" Height="31" Width="250" Foreground="White" FontSize="24" TextDecorations="{x:Null}" FontFamily="Segoe UI Light" TextAlignment="Right"/>
+        <TextBlock HorizontalAlignment="Right" Margin="0,37,19,0" TextWrapping="Wrap" Text="Level" VerticalAlignment="Top" Height="15" Width="28" Foreground="White" FontSize="12" TextDecorations="{x:Null}" FontFamily="Segoe UI Light"/>
+
+        <TextBlock x:Name="ScoreVisual" HorizontalAlignment="Left" Margin="10,6,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="50" Width="130" Foreground="White" FontSize="42" TextDecorations="{x:Null}" FontFamily="Segoe UI Light"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,56,0,0" TextWrapping="Wrap" Text="Score" VerticalAlignment="Top" Height="15" Width="28" Foreground="White" FontSize="12" TextDecorations="{x:Null}" FontFamily="Segoe UI Light"/>
+
+        <ProgressBar x:Name="ScoreProgressVisual" HorizontalAlignment="Center" Height="13" VerticalAlignment="Bottom" Width="794" Foreground="#CC4ADBEB" BorderBrush="{x:Null}" Background="#CEE6E6E6" LargeChange="0" Value="30" Margin="0,0,0,-3"/>
+        <ProgressBar x:Name="TimeProgressVisual" HorizontalAlignment="Center" Height="14" VerticalAlignment="Bottom" Width="794" Foreground="#CC4AEB5D" BorderBrush="{x:Null}" Background="{x:Null}" LargeChange="0" Value="20" Margin="0,0,0,-10"/>
+
     </Grid>
 </Window>

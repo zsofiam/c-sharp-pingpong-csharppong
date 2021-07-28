@@ -27,7 +27,7 @@ namespace CsharpPong
             var newLeftMargin = VisualRectangle.Margin.Left + Direction["leftMargin"];
             var newTopMargin = VisualRectangle.Margin.Top + Direction["topMargin"];
             VisualRectangle.Margin = new Thickness(newLeftMargin, newTopMargin, VisualRectangle.Margin.Right, VisualRectangle.Margin.Bottom);
-           
+
         }
 
         public void SetDirection()
