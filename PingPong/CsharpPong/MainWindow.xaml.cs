@@ -87,34 +87,37 @@ namespace CsharpPong
         {
             if (inGame && !isPaused)
             {
-                case Key.Left:
-                case Key.A:
+                switch (e.Key)
+                {
+                    case Key.Left:
+                    case Key.A:
                         paddle.Move("left");
                         break;
 
-                case Key.Right:
-                case Key.D:
+                    case Key.Right:
+                    case Key.D:
                         paddle.Move("right");
                         break;
 
 
-               case Key.NumPad0:
+                    case Key.NumPad0:
                         if (DEBUG) play(0);
                         break;
-               case Key.NumPad1:
+                    case Key.NumPad1:
                         if (DEBUG) play(1);
                         break;
 
-               case Key.NumPad2:
+                    case Key.NumPad2:
                         if (DEBUG) play(2);
                         break;
-               case Key.NumPad3:
+                    case Key.NumPad3:
                         if (DEBUG) play(3);
                         break;
-                        
-                case Key.Escape:
-                    HandleEscKey();
-                    break;
+
+                    case Key.Escape:
+                        HandleEscKey();
+                        break;
+                }
             }
         }
 
