@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace CsharpPong
 {
@@ -20,11 +21,13 @@ namespace CsharpPong
     {
         private string name;
         private int requiredScore;
+        private int maxTime;
 
-        public LevelInfo(string name, int requiredScore)
+        public LevelInfo(string name, int requiredScore, int maxTime)
         {
             this.name = name;
             this.requiredScore = requiredScore;
+            this.maxTime = maxTime;
         }
 
         public string getName()
@@ -36,6 +39,11 @@ namespace CsharpPong
         {
             return requiredScore;
         }
+
+        public int getMaxTime()
+        {
+            return maxTime;
+        }
     }
 
     /// <summary>
@@ -43,14 +51,21 @@ namespace CsharpPong
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool DEBUG = true;
+
+
         //Classes
         private Paddle paddle;
 
         //Variables
         private LevelInfo[] levels;
-        private int level;
-        private int score;
+        private bool inGame = true;
+        private bool isPaused = false;
+        private int level = 1;
+        private int score = 0;
 
+        private DispatcherTimer playTimer = new DispatcherTimer();
+        private int timeSpent = 0;
 
 
         public MainWindow()
@@ -61,10 +76,8 @@ namespace CsharpPong
             levels = new LevelInfo[4];
             createLevelData();
 
-            level = 1;
-            score = 0;
             initLevelText();
-            initProgressBar();
+            initProgressBars();
             updateOnScreenInfo();
         }
 
@@ -72,22 +85,53 @@ namespace CsharpPong
         //Key presses
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.Key)
+            if (inGame && !isPaused)
             {
-                case Key.Left:
-                case Key.A:
-                    paddle.Move("left");
-                    break;
+                switch (e.Key)
+                {
+                    case Key.Left:
+                    case Key.A:
+                        paddle.Move("left");
+                        break;
 
-                case Key.Right:
-                case Key.D:
-                    paddle.Move("right");
-                    break;
+                    case Key.Right:
+                    case Key.D:
+                        paddle.Move("right");
+                        break;
+
+
+                    case Key.NumPad0:
+                        if (DEBUG) play(0);
+                        break;
+                    case Key.NumPad1:
+                        if (DEBUG) play(1);
+                        break;
+
+                    case Key.NumPad2:
+                        if (DEBUG) play(2);
+                        break;
+                    case Key.NumPad3:
+                        if (DEBUG) play(3);
+                        break;
+                }
             }
         }
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            ProgressVisual.Width = this.ActualWidth;
+            ScoreProgressVisual.Width = this.ActualWidth;
+            TimeProgressVisual.Width = this.ActualWidth;
+        }
+        private void PlayTimer_Tick(object sender, EventArgs e)
+        {
+            timeSpent++;
+            updateProgressBars();
+
+            if (!(timeSpent >= levels[level].getMaxTime())) return;
+
+            playTimer.Stop();
+            pause();
+
+            if (DEBUG) MessageBox.Show("DEBUG: secs over");
         }
 
         // On screen stuff
@@ -96,26 +140,67 @@ namespace CsharpPong
             LevelVisual.Text = levels[level].getName();
         }
 
-        private void initProgressBar()
+        private void initProgressBars()
         {
-            ProgressVisual.Maximum = levels[level].getRequiredScore();
+            ScoreProgressVisual.Maximum = levels[level].getRequiredScore();
+            TimeProgressVisual.Maximum = levels[level].getMaxTime();
         }
 
         private void updateOnScreenInfo()
         {
             updateScore();
 
-            updateProgressBar();
+            updateProgressBars();
         }
-
+        //CALL THIS ONCE SCORES CHANGE
         private void updateScore()
         {
             ScoreVisual.Text = score.ToString();
         }
 
-        private void updateProgressBar()
+        private void updateProgressBars()
         {
-            ProgressVisual.Value = score;
+            ScoreProgressVisual.Value = score;
+            TimeProgressVisual.Value = timeSpent;
+        }
+
+        //Actual game control
+        private void play(int level)
+        {
+            stop();
+
+            this.level = level;
+
+            initLevelText();
+            initProgressBars();
+            updateOnScreenInfo();
+
+            //Start timer
+            playTimer.Interval = new TimeSpan(0, 0, 1);
+            playTimer.Tick += PlayTimer_Tick;
+            playTimer.Start();
+
+            inGame = true;
+            isPaused = false;
+        }
+
+        private void pause()
+        {
+            playTimer.Tick -= PlayTimer_Tick;
+            isPaused = true;
+        }
+
+        private void resume()
+        {
+            playTimer.Tick += PlayTimer_Tick;
+            isPaused = false;
+        }
+
+        private void stop()
+        {
+            playTimer.Tick -= PlayTimer_Tick;
+            inGame = false;
+            isPaused = false;
         }
 
         // Other and things that could get outsourced or have some debuggy purpose

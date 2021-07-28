@@ -23,7 +23,8 @@
         <TextBlock x:Name="ScoreVisual" HorizontalAlignment="Left" Margin="10,6,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="50" Width="130" Foreground="White" FontSize="42" TextDecorations="{x:Null}" FontFamily="Segoe UI Light"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,56,0,0" TextWrapping="Wrap" Text="Score" VerticalAlignment="Top" Height="15" Width="28" Foreground="White" FontSize="12" TextDecorations="{x:Null}" FontFamily="Segoe UI Light"/>
 
-        <ProgressBar x:Name="ProgressVisual" HorizontalAlignment="Center" Height="10" Margin="0,408,0,-3" VerticalAlignment="Bottom" Width="794" Foreground="#CC4ADBEB" BorderBrush="{x:Null}" Background="#CEE6E6E6" LargeChange="0"/>
+        <ProgressBar x:Name="ScoreProgressVisual" HorizontalAlignment="Center" Height="13" VerticalAlignment="Bottom" Width="794" Foreground="#CC4ADBEB" BorderBrush="{x:Null}" Background="#CEE6E6E6" LargeChange="0" Value="30" Margin="0,0,0,-3"/>
+        <ProgressBar x:Name="TimeProgressVisual" HorizontalAlignment="Center" Height="14" VerticalAlignment="Bottom" Width="794" Foreground="#CC4AEB5D" BorderBrush="{x:Null}" Background="{x:Null}" LargeChange="0" Value="20" Margin="0,0,0,-10"/>
 
     </Grid>
 </Window>
