@@ -207,12 +207,12 @@ namespace CsharpPong
             //This one is dummy/prototype level code, focus on later moving this to like a config file!!!
         private void createLevelData()
         {
-            LevelInfo easy = new LevelInfo("easy", 5);
-            LevelInfo medium = new LevelInfo("medium", 10);
-            LevelInfo intermediate = new LevelInfo("intermediate", 20);
+            LevelInfo easy = new LevelInfo("easy", 5, 180);
+            LevelInfo medium = new LevelInfo("medium", 10, 150);
+            LevelInfo intermediate = new LevelInfo("intermediate", 20, 130);
             //This is only here as to serve a placeholder in the 0th place in the array
             //Technically it should be impossible to ever start this! Later we could use it as a "developer hack" for instant win or something
-            LevelInfo hacker = new LevelInfo("hacker", 50);
+            LevelInfo hacker = new LevelInfo("hacker", 50, 100);
 
             levels[0] = hacker;
             levels[1] = easy;
