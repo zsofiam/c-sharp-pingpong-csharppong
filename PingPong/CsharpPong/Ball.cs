@@ -7,19 +7,23 @@ using System.Windows;
 
 namespace CsharpPong
 {
-    class Ball : Rectangle
+    public class Ball
     {
+        private MainWindow MainWindow;
+        private System.Windows.Shapes.Rectangle VisualRectangle;
+
         protected Dictionary<string, double> Direction = new Dictionary<string, double>();
         protected Random Random = new Random();
         private int _level = 1;
-        protected bool isColliding = false;
         private double lMargin;
         private double tMargin;
         private double rMargin;
         private double bMargin;
 
-        public Ball(MainWindow mainWindow, System.Windows.Shapes.Rectangle visualRectangle) : base(mainWindow, visualRectangle)
+        public Ball(MainWindow mainWindow, System.Windows.Shapes.Rectangle visualRectangle)
         {
+            MainWindow = mainWindow;
+            VisualRectangle = visualRectangle;
             lMargin = VisualRectangle.Margin.Left;
             tMargin = VisualRectangle.Margin.Top;
             rMargin = VisualRectangle.Margin.Right;
@@ -53,8 +57,8 @@ namespace CsharpPong
 
         public void SetDirection()
         {
-            Direction["leftMargin"] = 2 * _level;
-            Direction["topMargin"] = 8 * _level;
+            Direction["leftMargin"] = 10 * _level;
+            Direction["topMargin"] = 20 * _level;
         }
 
         public void ChangeDirection()
