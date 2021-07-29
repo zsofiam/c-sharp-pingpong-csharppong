@@ -160,7 +160,7 @@ namespace CsharpPong
         private void PlayTimer_Tick(object sender, EventArgs e)
         {
             timeSpent++;
-            updateProgressBars();
+            updateOnScreenInfo();
           
             if (!(timeSpent >= levels[level].getMaxTime())) return;
 
