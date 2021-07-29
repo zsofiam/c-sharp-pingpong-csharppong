@@ -167,13 +167,13 @@ namespace CsharpPong
 
             if ((timeSpent >= levels[level].getMaxTime())) {
                 playTimer.Stop();
-                pause();
+                Stop();
                 if (DEBUG) MessageBox.Show("TIME IS OVER!");
             }
 
             else if (score >= levels[level].getRequiredScore()){
                 playTimer.Stop();
-                pause();
+                Stop();
                 if(DEBUG) MessageBox.Show($"CONGRATS! You scored {score}!");
             }
 
@@ -249,6 +249,13 @@ namespace CsharpPong
             PauseVisual.Visibility = Visibility.Visible;
 
             isPaused = true;
+        }
+
+        private void Stop()
+        {
+            playTimer.Tick -= PlayTimer_Tick;
+            playTimer.Stop();
+            ball.halt();
         }
 
         private void resume()
