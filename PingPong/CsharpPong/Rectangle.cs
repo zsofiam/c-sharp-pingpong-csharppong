@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -36,26 +35,6 @@ namespace CsharpPong
             bMargin -= Direction["topMargin"];
             
         }
-
-        public void Move()
-        {
-            ChangeMargin();
-            VisualRectangle.Margin = new Thickness(lMargin, tMargin, rMargin, bMargin);
-        }
-
-        public void SetDirection()
-        {
-            Direction["leftMargin"] = Random.Next(-1, 2) * 10 * level;
-            Direction["topMargin"] = 10 * level;
-        }
-
-        public void ChangeDirection()
-        {
-            Direction["leftMargin"] = Random.Next(-1, 2) * 10 * level;
-            Direction["topMargin"] = 10 * level;
-        }
-
-
         protected override Geometry DefiningGeometry { get; }
     }
 }

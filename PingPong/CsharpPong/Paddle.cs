@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace CsharpPong
 {
     public class Paddle
     {
-        private MainWindow MainWindow;
+        private MainWindow _mainWindow;
         public System.Windows.Shapes.Rectangle VisualRectangle;
 
         public Paddle(MainWindow mainWindow, System.Windows.Shapes.Rectangle visualRectangle)
         {
-            MainWindow = mainWindow;
+            _mainWindow = mainWindow;
             VisualRectangle = visualRectangle;
         }
         public void Move(string direction)
@@ -25,10 +20,10 @@ namespace CsharpPong
                 switch (direction.ToLower())
                 {
                     case "left":
-                        if (lMargin >= -MainWindow.ActualWidth + VisualRectangle.ActualWidth) lMargin -= 10;
+                        if (lMargin >= -_mainWindow.ActualWidth + VisualRectangle.ActualWidth) lMargin -= 10;
                         break;
                     case "right":
-                        if (lMargin <= MainWindow.ActualWidth - VisualRectangle.ActualWidth) lMargin += 10;
+                        if (lMargin <= _mainWindow.ActualWidth - VisualRectangle.ActualWidth) lMargin += 10;
                         break;
                 }
             }
