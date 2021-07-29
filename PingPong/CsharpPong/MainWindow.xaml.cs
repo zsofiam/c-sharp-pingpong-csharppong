@@ -210,7 +210,8 @@ namespace CsharpPong
         //Actual game control
         private void play(int level)
         {
-            stop();
+            restart();
+
             ball.SetDirection();
             this.level = level;
 
@@ -247,7 +248,7 @@ namespace CsharpPong
             isPaused = false;
         }
 
-        private void stop()
+        private void restart()
         {
             playTimer.Tick -= PlayTimer_Tick;
 
