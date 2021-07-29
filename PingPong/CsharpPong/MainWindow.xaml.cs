@@ -144,6 +144,7 @@ namespace CsharpPong
         {
             //should pause game
             PopUpMenu.Visibility = Visibility.Visible;
+            ball.halt();
         }
         
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -155,7 +156,7 @@ namespace CsharpPong
         {
             timeSpent++;
             updateProgressBars();
-            ball.Move();
+            
             if (!(timeSpent >= levels[level].getMaxTime())) return;
 
             playTimer.Stop();
@@ -205,6 +206,7 @@ namespace CsharpPong
         private void NoButton_Click(object sender, RoutedEventArgs e)
         {
             PopUpMenu.Visibility = Visibility.Hidden;
+            ball.restart();
         }
 
         //Actual game control
@@ -223,6 +225,7 @@ namespace CsharpPong
             playTimer.Interval = new TimeSpan(0, 0, 1);
             playTimer.Tick += PlayTimer_Tick;
             playTimer.Start();
+            ball.startBall(level);
 
             inGame = true;
             isPaused = false;
@@ -232,7 +235,7 @@ namespace CsharpPong
         {
             playTimer.Tick -= PlayTimer_Tick;
             playTimer.Stop();
-
+            ball.halt();
             PauseVisual.Visibility = Visibility.Visible;
 
             isPaused = true;
@@ -242,7 +245,7 @@ namespace CsharpPong
         {
             playTimer.Tick += PlayTimer_Tick;
             playTimer.Start();
-
+            ball.restart();
             PauseVisual.Visibility = Visibility.Hidden;
 
             isPaused = false;
