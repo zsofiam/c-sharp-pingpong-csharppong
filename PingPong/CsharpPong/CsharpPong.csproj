@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Ball.cs" />
     <Compile Include="Paddle.cs" />
+    <Compile Include="Rectangle.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

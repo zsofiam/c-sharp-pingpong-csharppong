@@ -20,7 +20,7 @@
                 <ImageBrush ImageSource="img/paddle.png"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Rectangle x:Name="BallVisual" HorizontalAlignment="Center" Height="50" Margin="365,10,370,350"  Width="50" StrokeThickness="0">
+        <Rectangle x:Name="BallVisual" HorizontalAlignment="Center" Height="50" Margin="365,10,370,350"  Width="50" StrokeThickness="0" RadiusX="25" RadiusY="25">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="img/ball.png"/>
             </Rectangle.Fill>
