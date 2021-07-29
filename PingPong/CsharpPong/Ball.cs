@@ -21,16 +21,16 @@ namespace CsharpPong
 
         }
 
-        public void startBall(int level)
+        public void StartBall(int level)
         {
             this.level = level;
             SetDirection();
-            setSpeed();
-            _timer.Tick += new EventHandler(dispatcherTimer_Tick);
+            SetSpeed();
+            _timer.Tick += new EventHandler(DispatcherTimer_Tick);
             _timer.Start();
         }
 
-        private void setSpeed()
+        private void SetSpeed()
         {
             switch (level)
             {
@@ -50,21 +50,21 @@ namespace CsharpPong
             
         }
 
-        public void halt()
+        public void Halt()
         {
             _timer.Stop();
         }
-        public void restart()
+        public void Restart()
         {
             _timer.Start();
         }
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             this.Move();
         }
         
                
-public new void Move()
+        public void Move()
         {
             ChangeMargin();
             VisualRectangle.Margin = new Thickness(lMargin, tMargin, rMargin, bMargin);
@@ -74,9 +74,9 @@ public new void Move()
             {
                 Bounce();
             }
-            if (collisionHappens())
+            if (CollisionHappens())
             {
-                bounceBackFromPaddle();
+                BounceBackFromPaddle();
             }
             if (falls())
             {
@@ -98,7 +98,7 @@ public new void Move()
 
         }
 
-        public new void SetDirection()
+        public void SetDirection()
         {
             lMargin = 0;
             tMargin = 0;
@@ -108,7 +108,7 @@ public new void Move()
             Direction["topMargin"] = 20 * level;
         }
 
-        public new void ChangeDirection()
+        public void ChangeDirection()
         {
             Direction["topMargin"] = -1 * Direction["topMargin"];
         }
@@ -118,7 +118,7 @@ public new void Move()
             return tMargin > MainWindow.ActualHeight;
         }
 
-        private bool collisionHappens()
+        private bool CollisionHappens()
         {
 
             //return lMargin == _paddle.VisualRectangle.Margin.Left
@@ -129,7 +129,7 @@ public new void Move()
                      _paddle.VisualRectangle.Margin.Left -2* _paddle.VisualRectangle.Width <= VisualRectangle.Margin.Left &&
                      _paddle.VisualRectangle.Margin.Left + _paddle.VisualRectangle.Width >= VisualRectangle.Margin.Left;
         }
-        internal void bounceBackFromPaddle()
+        internal void BounceBackFromPaddle()
         {
             Direction["topMargin"] = -1 * Direction["topMargin"];
             MainWindow.IncreaseScore();
