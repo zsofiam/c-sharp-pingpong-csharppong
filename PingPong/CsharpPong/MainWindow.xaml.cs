@@ -200,7 +200,7 @@ namespace CsharpPong
         //CALL THIS ONCE SCORES CHANGE
         private void UpdateScore()
         {
-            ScoreVisual.Text = _score.ToString();
+            ScoreVisual.Text = _score.ToString() + "/" + _levels[_level].GetRequiredScore();
         }
 
         private void UpdateProgressBars()
