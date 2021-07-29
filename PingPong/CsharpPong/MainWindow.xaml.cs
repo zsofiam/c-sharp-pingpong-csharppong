@@ -233,7 +233,7 @@ namespace CsharpPong
         {
             playTimer.Tick -= PlayTimer_Tick;
             playTimer.Stop();
-
+            ball.halt();
             PauseVisual.Visibility = Visibility.Visible;
 
             isPaused = true;
@@ -243,7 +243,7 @@ namespace CsharpPong
         {
             playTimer.Tick += PlayTimer_Tick;
             playTimer.Start();
-
+            ball.restart();
             PauseVisual.Visibility = Visibility.Hidden;
 
             isPaused = false;

@@ -17,10 +17,18 @@ namespace CsharpPong
             _timer = new DispatcherTimer();
             _timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             _timer.Tick += new EventHandler(dispatcherTimer_Tick);
-           
+
         }
 
         public void startBall()
+        {
+            _timer.Start();
+        }
+        public void halt()
+        {
+            _timer.Stop();
+        }
+        public void restart()
         {
             _timer.Start();
         }
