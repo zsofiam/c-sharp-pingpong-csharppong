@@ -19,30 +19,30 @@ namespace CsharpPong
     // This needs some other info like ball speed and stuff
     struct LevelInfo
     {
-        private string name;
-        private int requiredScore;
-        private int maxTime;
+        private string _name;
+        private int _requiredScore;
+        private int _maxTime;
 
         public LevelInfo(string name, int requiredScore, int maxTime)
         {
-            this.name = name;
-            this.requiredScore = requiredScore;
-            this.maxTime = maxTime;
+            this._name = name;
+            this._requiredScore = requiredScore;
+            this._maxTime = maxTime;
         }
 
-        public string getName()
+        public string GetName()
         {
-            return name;
+            return _name;
         }
 
-        public int getRequiredScore()
+        public int GetRequiredScore()
         {
-            return requiredScore;
+            return _requiredScore;
         }
 
-        public int getMaxTime()
+        public int GetMaxTime()
         {
-            return maxTime;
+            return _maxTime;
         }
     }
 
@@ -51,72 +51,72 @@ namespace CsharpPong
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool DEBUG = false;
+        private bool _debug = false;
 
         //Classes
-        private Paddle paddle;
-        private Ball ball;
+        private Paddle _paddle;
+        private Ball _ball;
 
         //Variables
-        private LevelInfo[] levels;
-        private bool inGame = true;
-        private bool isPaused = false;
-        private int level = 1;
-        private int score = 0;
+        private LevelInfo[] _levels;
+        private bool _inGame = true;
+        private bool _isPaused = false;
+        private int _level = 1;
+        private int _score = 0;
 
-        private DispatcherTimer playTimer = new DispatcherTimer();
-        private int timeSpent = 0;
+        private DispatcherTimer _playTimer = new DispatcherTimer();
+        private int _timeSpent = 0;
 
 
         public MainWindow()
         {
             InitializeComponent();
-            paddle = new Paddle(this, PaddleVisual);
-            ball = new Ball(BallVisual, paddle, this);
-            levels = new LevelInfo[4];
-            createLevelData();
+            _paddle = new Paddle(this, PaddleVisual);
+            _ball = new Ball(BallVisual, _paddle, this);
+            _levels = new LevelInfo[4];
+            CreateLevelData();
 
-            initLevelText();
-            initProgressBars();
-            updateOnScreenInfo();
+            InitLevelText();
+            InitProgressBars();
+            UpdateOnScreenInfo();
         }
         //Window stuff
         //Key presses
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if (inGame && !isPaused)
+            if (_inGame && !_isPaused)
             {
                 switch (e.Key)
                 {
                     case Key.Left:
                     case Key.A:
-                        paddle.Move("left");
+                        _paddle.Move("left");
                         break;
 
                     case Key.Right:
                     case Key.D:
-                        paddle.Move("right");
+                        _paddle.Move("right");
                         break;
 
                     //Manually update the on-screen-info
                     //Later this HAS TO be moved to the trigger when the ball and the paddle collides!
                     case Key.G:
-                        updateOnScreenInfo();
+                        UpdateOnScreenInfo();
                         break;
 
 
                     case Key.NumPad0:
-                        if (DEBUG) play(0);
+                        if (_debug) Play(0);
                         break;
                     case Key.NumPad1:
-                        if (DEBUG) play(1);
+                        if (_debug) Play(1);
                         break;
 
                     case Key.NumPad2:
-                        if (DEBUG) play(2);
+                        if (_debug) Play(2);
                         break;
                     case Key.NumPad3:
-                        if (DEBUG) play(3);
+                        if (_debug) Play(3);
                         break;
 
                     case Key.Escape:
@@ -124,17 +124,17 @@ namespace CsharpPong
                         break;
 
                     case Key.Space:
-                        if (isPaused) resume();
-                        else pause();
+                        if (_isPaused) Resume();
+                        else Pause();
                         break;
                 }
             }
             else
             {
-                if ((inGame) && (e.Key == Key.Space))
+                if ((_inGame) && (e.Key == Key.Space))
                 {
-                    if (isPaused) resume();
-                    else pause();
+                    if (_isPaused) Resume();
+                    else Pause();
                 }
             }
         }
@@ -143,7 +143,7 @@ namespace CsharpPong
         {
             //should pause game
             PopUpMenu.Visibility = Visibility.Visible;
-            ball.halt();
+            _ball.halt();
         }
         
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -154,59 +154,59 @@ namespace CsharpPong
 
         internal void IncreaseScore()
         {
-            score++;
+            _score++;
         }
 
         private void PlayTimer_Tick(object sender, EventArgs e)
         {
-            timeSpent++;
-            updateOnScreenInfo();
+            _timeSpent++;
+            UpdateOnScreenInfo();
 
-            timeSpent++;
-            updateProgressBars();
+            _timeSpent++;
+            UpdateProgressBars();
 
-            if (timeSpent >= levels[level].getMaxTime()) {
-                playTimer.Stop();
+            if (_timeSpent >= _levels[_level].GetMaxTime()) {
+                _playTimer.Stop();
                 Stop();
                 MessageBox.Show("TIME IS OVER!");
             }
 
-            else if (score >= levels[level].getRequiredScore()){
-                playTimer.Stop();
+            else if (_score >= _levels[_level].GetRequiredScore()){
+                _playTimer.Stop();
                 Stop();
-                MessageBox.Show($"CONGRATS! You scored {score}!");
+                MessageBox.Show($"CONGRATS! You scored {_score}!");
             }
 
         }
 
         // On screen stuff
-        private void initLevelText()
+        private void InitLevelText()
         {
-            LevelVisual.Text = levels[level].getName();
+            LevelVisual.Text = _levels[_level].GetName();
         }
 
-        private void initProgressBars()
+        private void InitProgressBars()
         {
-            ScoreProgressVisual.Maximum = levels[level].getRequiredScore();
-            TimeProgressVisual.Maximum = levels[level].getMaxTime();
+            ScoreProgressVisual.Maximum = _levels[_level].GetRequiredScore();
+            TimeProgressVisual.Maximum = _levels[_level].GetMaxTime();
         }
 
-        private void updateOnScreenInfo()
+        private void UpdateOnScreenInfo()
         {
-            updateScore();
+            UpdateScore();
 
-            updateProgressBars();
+            UpdateProgressBars();
         }
         //CALL THIS ONCE SCORES CHANGE
-        private void updateScore()
+        private void UpdateScore()
         {
-            ScoreVisual.Text = score.ToString();
+            ScoreVisual.Text = _score.ToString();
         }
 
-        private void updateProgressBars()
+        private void UpdateProgressBars()
         {
-            ScoreProgressVisual.Value = score;
-            TimeProgressVisual.Value = timeSpent;
+            ScoreProgressVisual.Value = _score;
+            TimeProgressVisual.Value = _timeSpent;
         }
         
         private void YesButton_Click(object sender, RoutedEventArgs e)
@@ -217,104 +217,104 @@ namespace CsharpPong
         private void NoButton_Click(object sender, RoutedEventArgs e)
         {
             PopUpMenu.Visibility = Visibility.Hidden;
-            ball.restart();
+            _ball.restart();
         }
 
         //Actual game control
-        private void play(int level)
+        private void Play(int level)
         {
-            this.level = level;
-            restart();
+            this._level = level;
+            Restart();
 
-            ball.SetDirection();
-            initLevelText();
-            initProgressBars();
-            updateOnScreenInfo();
+            _ball.SetDirection();
+            InitLevelText();
+            InitProgressBars();
+            UpdateOnScreenInfo();
 
             //Start timer
-            playTimer.Interval = new TimeSpan(0, 0, 0, 0, 50);
-            playTimer.Tick += PlayTimer_Tick;
-            playTimer.Start();
-            ball.startBall(level);
+            _playTimer.Interval = new TimeSpan(0, 0, 0, 0, 50);
+            _playTimer.Tick += PlayTimer_Tick;
+            _playTimer.Start();
+            _ball.startBall(level);
 
-            inGame = true;
-            isPaused = false;
+            _inGame = true;
+            _isPaused = false;
         }
 
-        private void pause()
+        private void Pause()
         {
-            playTimer.Tick -= PlayTimer_Tick;
-            playTimer.Stop();
-            ball.halt();
+            _playTimer.Tick -= PlayTimer_Tick;
+            _playTimer.Stop();
+            _ball.halt();
             PauseVisual.Visibility = Visibility.Visible;
 
-            isPaused = true;
+            _isPaused = true;
         }
 
         private void Stop()
         {
-            playTimer.Tick -= PlayTimer_Tick;
-            playTimer.Stop();
-            ball.halt();
+            _playTimer.Tick -= PlayTimer_Tick;
+            _playTimer.Stop();
+            _ball.halt();
         }
 
-        private void resume()
+        private void Resume()
         {
-            playTimer.Tick += PlayTimer_Tick;
-            playTimer.Start();
-            ball.restart();
+            _playTimer.Tick += PlayTimer_Tick;
+            _playTimer.Start();
+            _ball.restart();
             PauseVisual.Visibility = Visibility.Hidden;
 
-            isPaused = false;
+            _isPaused = false;
         }
 
-        private void restart()
+        private void Restart()
         {
-            playTimer.Tick -= PlayTimer_Tick;
+            _playTimer.Tick -= PlayTimer_Tick;
 
-            timeSpent = 0;
-            score = 0;
+            _timeSpent = 0;
+            _score = 0;
 
-            inGame = false;
-            isPaused = false;
+            _inGame = false;
+            _isPaused = false;
         }
 
         // Other and things that could get outsourced or have some debuggy purpose
             //This one is dummy/prototype level code, focus on later moving this to like a config file!!!
-        private void createLevelData()
+        private void CreateLevelData()
         {
-            LevelInfo easy = new LevelInfo("Easy", 5, 1000);
+            LevelInfo easy = new LevelInfo("Basic", 5, 1000);
             LevelInfo intermediate = new LevelInfo("Intermediate", 10, 700);
             LevelInfo expert = new LevelInfo("Expert", 20, 400);
             //This is only here as to serve a placeholder in the 0th place in the array
             //Technically it should be impossible to ever start this! Later we could use it as a "developer hack" for instant win or something
             LevelInfo hacker = new LevelInfo("hacker", 50, 100);
 
-            levels[0] = hacker;
-            levels[1] = easy;
-            levels[2] = intermediate;
-            levels[3] = expert;
+            _levels[0] = hacker;
+            _levels[1] = easy;
+            _levels[2] = intermediate;
+            _levels[3] = expert;
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             if (BasicLevel.IsChecked != null && (bool)BasicLevel.IsChecked)
             {
-                level = 1;
+                _level = 1;
                 
             }
             else if (IntermediateLevel.IsChecked != null && (bool)IntermediateLevel.IsChecked)
             {
-                level = 2;
+                _level = 2;
                 
             }
             else
             {
-                level = 3;
+                _level = 3;
                
             }
 
-            play(level);
+            Play(_level);
             StartMenu.Visibility = Visibility.Hidden;
         }
     }
