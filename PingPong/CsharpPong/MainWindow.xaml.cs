@@ -72,7 +72,7 @@ namespace CsharpPong
         {
             InitializeComponent();
             paddle = new Paddle(this, PaddleVisual);
-            ball = new Ball(this, BallVisual);
+            ball = new Ball(BallVisual, paddle, this);
             levels = new LevelInfo[4];
             createLevelData();
 
@@ -80,7 +80,6 @@ namespace CsharpPong
             initProgressBars();
             updateOnScreenInfo();
         }
-
         //Window stuff
         //Key presses
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -156,16 +155,15 @@ namespace CsharpPong
         {
             timeSpent++;
             updateProgressBars();
-            
+          
             if (!(timeSpent >= levels[level].getMaxTime())) return;
 
             playTimer.Stop();
             pause();
 
             if (DEBUG) MessageBox.Show("DEBUG: secs over");
-
+            
         }
-
 
         // On screen stuff
         private void initLevelText()

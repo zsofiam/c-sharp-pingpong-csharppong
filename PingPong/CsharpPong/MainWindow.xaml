@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CsharpPong"
         mc:Ignorable="d"
-        WindowState="Maximized"
+        
         Title="SharPong" Height="450" Width="800" KeyDown="Window_KeyDown" SizeChanged="Window_SizeChanged"
         MinHeight="450"
         MinWidth="800">
@@ -27,7 +27,7 @@
                    Height="50" Margin="0,0,0,0"  Width="50" StrokeThickness="0"
                    MinWidth="50"
                    MinHeight="50"
-                   RadiusX="25" RadiusY="25">
+                    RadiusX="100" RadiusY="100">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="img/ball.png"/>
             </Rectangle.Fill>

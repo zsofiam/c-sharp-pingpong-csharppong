@@ -11,10 +11,13 @@ namespace CsharpPong
     public class Ball : Rectangle
     {
         private DispatcherTimer _timer;
+        private Paddle _paddle;
 
-        public Ball(MainWindow mainWindow, System.Windows.Shapes.Rectangle visualRectangle) : base(mainWindow, visualRectangle)
+        public Ball(System.Windows.Shapes.Rectangle visualRectangle, Paddle paddle,
+            MainWindow mainWindow) : base(mainWindow, visualRectangle)
         {
             _timer = new DispatcherTimer();
+            this._paddle = paddle;
 
         }
 
@@ -71,6 +74,10 @@ public new void Move()
             {
                 Bounce();
             }
+            if (collisionHappens())
+            {
+                bounceBackFromPaddle();
+            }
             if (falls())
             {
                 SetDirection();
@@ -103,12 +110,28 @@ public new void Move()
 
         public new void ChangeDirection()
         {
-       
+            Direction["topMargin"] = -1 * Direction["topMargin"];
         }
 
         internal bool falls()
         {
             return tMargin > MainWindow.ActualHeight;
+        }
+
+        private bool collisionHappens()
+        {
+
+            //return lMargin == _paddle.VisualRectangle.Margin.Left
+            //    && tMargin + VisualRectangle.Height > MainWindow.Height - _paddle.VisualRectangle.Margin.Bottom
+            //    - _paddle.VisualRectangle.Height;
+
+            return tMargin >= MainWindow.ActualHeight - 1.5 * _paddle.VisualRectangle.Height - 2 * VisualRectangle.ActualHeight &&
+                     _paddle.VisualRectangle.Margin.Left -2* _paddle.VisualRectangle.Width <= VisualRectangle.Margin.Left &&
+                     _paddle.VisualRectangle.Margin.Left + _paddle.VisualRectangle.Width >= VisualRectangle.Margin.Left;
+        }
+        internal void bounceBackFromPaddle()
+        {
+            Direction["topMargin"] = -1 * Direction["topMargin"];
         }
     }
 }
