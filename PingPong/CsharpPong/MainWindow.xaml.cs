@@ -165,7 +165,7 @@ namespace CsharpPong
             timeSpent++;
             updateProgressBars();
 
-            if ((timeSpent >= levels[level].getMaxTime())) {
+            if (timeSpent >= levels[level].getMaxTime()) {
                 playTimer.Stop();
                 Stop();
                 if (DEBUG) MessageBox.Show("TIME IS OVER!");
@@ -232,7 +232,7 @@ namespace CsharpPong
             updateOnScreenInfo();
 
             //Start timer
-            playTimer.Interval = new TimeSpan(0, 0, 1);
+            playTimer.Interval = new TimeSpan(0, 0, 0, 0, 50);
             playTimer.Tick += PlayTimer_Tick;
             playTimer.Start();
             ball.startBall(level);
@@ -283,9 +283,9 @@ namespace CsharpPong
             //This one is dummy/prototype level code, focus on later moving this to like a config file!!!
         private void createLevelData()
         {
-            LevelInfo easy = new LevelInfo("Easy", 5, 180);
-            LevelInfo intermediate = new LevelInfo("Intermediate", 10, 150);
-            LevelInfo expert = new LevelInfo("Expert", 20, 130);
+            LevelInfo easy = new LevelInfo("Easy", 5, 1000);
+            LevelInfo intermediate = new LevelInfo("Intermediate", 10, 700);
+            LevelInfo expert = new LevelInfo("Expert", 20, 400);
             //This is only here as to serve a placeholder in the 0th place in the array
             //Technically it should be impossible to ever start this! Later we could use it as a "developer hack" for instant win or something
             LevelInfo hacker = new LevelInfo("hacker", 50, 100);

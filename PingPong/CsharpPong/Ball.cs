@@ -38,7 +38,7 @@ namespace CsharpPong
                     _timer.Interval = new TimeSpan(0, 0, 0, 0, 30);
                     break;
                 case 1:
-                    _timer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+                    _timer.Interval = new TimeSpan(0, 0, 0, 0, 90);
                     break;
                 case 2:
                     _timer.Interval = new TimeSpan(0, 0, 0, 0, 70);
