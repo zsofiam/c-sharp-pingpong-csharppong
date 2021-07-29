@@ -242,6 +242,10 @@ namespace CsharpPong
         private void stop()
         {
             playTimer.Tick -= PlayTimer_Tick;
+
+            timeSpent = 0;
+            score = 0;
+
             inGame = false;
             isPaused = false;
         }
