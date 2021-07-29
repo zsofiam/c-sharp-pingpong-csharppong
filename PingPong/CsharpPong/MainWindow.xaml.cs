@@ -151,6 +151,12 @@ namespace CsharpPong
             ScoreProgressVisual.Width = this.ActualWidth;
             TimeProgressVisual.Width = this.ActualWidth;
         }
+
+        internal void IncreaseScore()
+        {
+            score++;
+        }
+
         private void PlayTimer_Tick(object sender, EventArgs e)
         {
             timeSpent++;

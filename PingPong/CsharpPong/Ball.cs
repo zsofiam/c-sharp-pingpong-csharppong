@@ -132,6 +132,7 @@ public new void Move()
         internal void bounceBackFromPaddle()
         {
             Direction["topMargin"] = -1 * Direction["topMargin"];
+            MainWindow.IncreaseScore();
         }
     }
 }
