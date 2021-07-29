@@ -21,6 +21,7 @@ namespace CsharpPong
         public void startBall(int level)
         {
             this.level = level;
+            SetDirection();
             setSpeed();
             _timer.Tick += new EventHandler(dispatcherTimer_Tick);
             _timer.Start();
@@ -66,8 +67,7 @@ public new void Move()
             VisualRectangle.Margin = new Thickness(lMargin, tMargin, rMargin, bMargin);
             if(lMargin > (MainWindow.ActualWidth/2)
                 || lMargin < -(MainWindow.ActualWidth/2) 
-                || tMargin < 0
-                || tMargin > MainWindow.ActualHeight)
+                || tMargin < 0)
             {
                 Bounce();
             }
@@ -75,8 +75,7 @@ public new void Move()
 
         private void Bounce()
         {
-            if (tMargin < 0
-                || tMargin > MainWindow.ActualHeight)
+            if (tMargin < 0)
             {
                 Direction["topMargin"] = -1 * Direction["topMargin"];
             }
@@ -90,6 +89,10 @@ public new void Move()
 
         public new void SetDirection()
         {
+            lMargin = 0;
+            tMargin = 0;
+            rMargin = 0;
+            bMargin = 0;
             Direction["leftMargin"] = 10 * level;
             Direction["topMargin"] = 20 * level;
         }
@@ -97,6 +100,11 @@ public new void Move()
         public new void ChangeDirection()
         {
        
+        }
+
+        internal bool falls()
+        {
+            return tMargin > MainWindow.ActualHeight;
         }
     }
 }

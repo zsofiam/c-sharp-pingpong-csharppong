@@ -156,7 +156,10 @@ namespace CsharpPong
         {
             timeSpent++;
             updateProgressBars();
-            
+            if (ball.falls())
+            {
+                generateNewBall();
+            }
             if (!(timeSpent >= levels[level].getMaxTime())) return;
 
             playTimer.Stop();
@@ -165,8 +168,12 @@ namespace CsharpPong
             if (DEBUG) MessageBox.Show("DEBUG: secs over");
         }
 
-        
-        
+        private void generateNewBall()
+        {
+            ball = null;
+            ball = new Ball(this, BallVisual);
+            ball.startBall(level);
+        }
 
         // On screen stuff
         private void initLevelText()
@@ -214,7 +221,6 @@ namespace CsharpPong
         {
             restart();
 
-            ball.SetDirection();
             this.level = level;
 
             initLevelText();
