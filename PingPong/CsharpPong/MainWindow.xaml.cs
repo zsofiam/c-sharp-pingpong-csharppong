@@ -123,6 +123,11 @@ namespace CsharpPong
                     case Key.Escape:
                         HandleEscKey();
                         break;
+
+                    case Key.Space:
+                        if (isPaused) resume();
+                        else pause();
+                        break;
                 }
             }
         }
@@ -217,12 +222,20 @@ namespace CsharpPong
         private void pause()
         {
             playTimer.Tick -= PlayTimer_Tick;
+            playTimer.Stop();
+
+            PauseVisual.Visibility = Visibility.Visible;
+
             isPaused = true;
         }
 
         private void resume()
         {
             playTimer.Tick += PlayTimer_Tick;
+            playTimer.Start();
+
+            PauseVisual.Visibility = Visibility.Hidden;
+
             isPaused = false;
         }
 
