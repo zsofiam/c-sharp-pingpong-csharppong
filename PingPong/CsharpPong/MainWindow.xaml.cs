@@ -161,14 +161,22 @@ namespace CsharpPong
         {
             timeSpent++;
             updateOnScreenInfo();
-          
-            if (!(timeSpent >= levels[level].getMaxTime())) return;
 
-            playTimer.Stop();
-            pause();
+            timeSpent++;
+            updateProgressBars();
 
-            if (DEBUG) MessageBox.Show("DEBUG: secs over");
-            
+            if ((timeSpent >= levels[level].getMaxTime())) {
+                playTimer.Stop();
+                pause();
+                if (DEBUG) MessageBox.Show("TIME IS OVER!");
+            }
+
+            else if (score >= levels[level].getRequiredScore()){
+                playTimer.Stop();
+                pause();
+                if(DEBUG) MessageBox.Show($"CONGRATS! You scored {score}!");
+            }
+
         }
 
         // On screen stuff
