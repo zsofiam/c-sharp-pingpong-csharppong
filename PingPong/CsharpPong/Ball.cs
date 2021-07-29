@@ -4,16 +4,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace CsharpPong
 {
     public class Ball : Rectangle
     {
+        private DispatcherTimer _timer;
 
         public Ball(MainWindow mainWindow, System.Windows.Shapes.Rectangle visualRectangle) : base(mainWindow, visualRectangle)
         {
-
+            _timer = new DispatcherTimer();
+            _timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+            _timer.Tick += new EventHandler(dispatcherTimer_Tick);
+           
         }
+
+        public void startBall()
+        {
+            _timer.Start();
+        }
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            this.Move();
+
+            //if (myProgressBar.Value >= 100)
+            //{
+            //    _timer.Stop();
+            //}
+        }
+
         public new void Move()
         {
             ChangeMargin();

@@ -155,7 +155,7 @@ namespace CsharpPong
         {
             timeSpent++;
             updateProgressBars();
-            ball.Move();
+            
             if (!(timeSpent >= levels[level].getMaxTime())) return;
 
             playTimer.Stop();
@@ -223,6 +223,7 @@ namespace CsharpPong
             playTimer.Interval = new TimeSpan(0, 0, 1);
             playTimer.Tick += PlayTimer_Tick;
             playTimer.Start();
+            ball.startBall();
 
             inGame = true;
             isPaused = false;
