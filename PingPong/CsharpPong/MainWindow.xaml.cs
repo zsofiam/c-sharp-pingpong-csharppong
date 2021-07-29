@@ -223,7 +223,7 @@ namespace CsharpPong
             playTimer.Interval = new TimeSpan(0, 0, 1);
             playTimer.Tick += PlayTimer_Tick;
             playTimer.Start();
-            ball.startBall();
+            ball.startBall(level);
 
             inGame = true;
             isPaused = false;

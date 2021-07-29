@@ -15,15 +15,38 @@ namespace CsharpPong
         public Ball(MainWindow mainWindow, System.Windows.Shapes.Rectangle visualRectangle) : base(mainWindow, visualRectangle)
         {
             _timer = new DispatcherTimer();
-            _timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
-            _timer.Tick += new EventHandler(dispatcherTimer_Tick);
+            
 
         }
 
-        public void startBall()
+        public void startBall(int level)
         {
+            this.level = level;
+            setSpeed();
+            _timer.Tick += new EventHandler(dispatcherTimer_Tick);
             _timer.Start();
         }
+
+        private void setSpeed()
+        {
+            switch (level)
+            {
+                case 0:
+                    _timer.Interval = new TimeSpan(0, 0, 0, 0, 20);
+                    break;
+                case 1:
+                    _timer.Interval = new TimeSpan(0, 0, 0, 0, 150);
+                    break;
+                case 2:
+                    _timer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+                    break;
+                case 3:
+                    _timer.Interval = new TimeSpan(0, 0, 0, 0, 50);
+                    break;
+            }
+            
+        }
+
         public void halt()
         {
             _timer.Stop();
