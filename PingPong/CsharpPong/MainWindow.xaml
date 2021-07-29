@@ -34,5 +34,6 @@
         <ProgressBar x:Name="ScoreProgressVisual" HorizontalAlignment="Center" Height="13" VerticalAlignment="Bottom" Width="794" Foreground="#CC4ADBEB" BorderBrush="{x:Null}" Background="#CEE6E6E6" LargeChange="0" Value="30" Margin="0,0,0,-3"/>
         <ProgressBar x:Name="TimeProgressVisual" HorizontalAlignment="Center" Height="14" VerticalAlignment="Bottom" Width="794" Foreground="#CC4AEB5D" BorderBrush="{x:Null}" Background="{x:Null}" LargeChange="0" Value="20" Margin="0,0,0,-10"/>
 
+        <TextBlock x:Name="PauseVisual" Visibility="Hidden" HorizontalAlignment="Center" Margin="275,160,268,160" TextWrapping="Wrap" Text="PAUSED" VerticalAlignment="Center" Height="100" Width="251" Foreground="White" FontSize="72" TextDecorations="{x:Null}" FontFamily="Segoe UI Light" TextAlignment="Center"/>
     </Grid>
 </Window>

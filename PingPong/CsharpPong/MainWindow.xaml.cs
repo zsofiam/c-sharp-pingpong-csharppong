@@ -123,6 +123,19 @@ namespace CsharpPong
                     case Key.Escape:
                         HandleEscKey();
                         break;
+
+                    case Key.Space:
+                        if (isPaused) resume();
+                        else pause();
+                        break;
+                }
+            }
+            else
+            {
+                if ((inGame) && (e.Key == Key.Space))
+                {
+                    if (isPaused) resume();
+                    else pause();
                 }
             }
         }
@@ -197,7 +210,8 @@ namespace CsharpPong
         //Actual game control
         private void play(int level)
         {
-            stop();
+            restart();
+
             ball.SetDirection();
             this.level = level;
 
@@ -217,18 +231,30 @@ namespace CsharpPong
         private void pause()
         {
             playTimer.Tick -= PlayTimer_Tick;
+            playTimer.Stop();
+
+            PauseVisual.Visibility = Visibility.Visible;
+
             isPaused = true;
         }
 
         private void resume()
         {
             playTimer.Tick += PlayTimer_Tick;
+            playTimer.Start();
+
+            PauseVisual.Visibility = Visibility.Hidden;
+
             isPaused = false;
         }
 
-        private void stop()
+        private void restart()
         {
             playTimer.Tick -= PlayTimer_Tick;
+
+            timeSpent = 0;
+            score = 0;
+
             inGame = false;
             isPaused = false;
         }
