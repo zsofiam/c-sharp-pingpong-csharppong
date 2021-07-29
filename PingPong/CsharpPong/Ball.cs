@@ -71,6 +71,10 @@ public new void Move()
             {
                 Bounce();
             }
+            if (falls())
+            {
+                SetDirection();
+            }
         }
 
         private void Bounce()
