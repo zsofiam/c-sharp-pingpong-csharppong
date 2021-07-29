@@ -51,7 +51,7 @@ namespace CsharpPong
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool DEBUG = true;
+        private bool DEBUG = false;
 
         //Classes
         private Paddle paddle;
@@ -168,13 +168,13 @@ namespace CsharpPong
             if (timeSpent >= levels[level].getMaxTime()) {
                 playTimer.Stop();
                 Stop();
-                if (DEBUG) MessageBox.Show("TIME IS OVER!");
+                MessageBox.Show("TIME IS OVER!");
             }
 
             else if (score >= levels[level].getRequiredScore()){
                 playTimer.Stop();
                 Stop();
-                if(DEBUG) MessageBox.Show($"CONGRATS! You scored {score}!");
+                MessageBox.Show($"CONGRATS! You scored {score}!");
             }
 
         }
