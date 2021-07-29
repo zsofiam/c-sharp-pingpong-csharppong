@@ -26,7 +26,7 @@
                    Height="50" Margin="0,0,0,0"  Width="50" StrokeThickness="0"
                    MinWidth="50"
                    MinHeight="50"
-                   RadiusX="25" RadiusY="25">
+                    RadiusX="100" RadiusY="100">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="img/ball.png"/>
             </Rectangle.Fill>
