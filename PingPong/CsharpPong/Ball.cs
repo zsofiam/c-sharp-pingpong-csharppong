@@ -15,7 +15,6 @@ namespace CsharpPong
         public Ball(MainWindow mainWindow, System.Windows.Shapes.Rectangle visualRectangle) : base(mainWindow, visualRectangle)
         {
             _timer = new DispatcherTimer();
-            
 
         }
 
@@ -32,13 +31,13 @@ namespace CsharpPong
             switch (level)
             {
                 case 0:
-                    _timer.Interval = new TimeSpan(0, 0, 0, 0, 20);
+                    _timer.Interval = new TimeSpan(0, 0, 0, 0, 30);
                     break;
                 case 1:
-                    _timer.Interval = new TimeSpan(0, 0, 0, 0, 150);
+                    _timer.Interval = new TimeSpan(0, 0, 0, 0, 100);
                     break;
                 case 2:
-                    _timer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+                    _timer.Interval = new TimeSpan(0, 0, 0, 0, 70);
                     break;
                 case 3:
                     _timer.Interval = new TimeSpan(0, 0, 0, 0, 50);
@@ -58,18 +57,17 @@ namespace CsharpPong
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             this.Move();
-
-            //if (myProgressBar.Value >= 100)
-            //{
-            //    _timer.Stop();
-            //}
         }
-
-        public new void Move()
+        
+               
+public new void Move()
         {
             ChangeMargin();
             VisualRectangle.Margin = new Thickness(lMargin, tMargin, rMargin, bMargin);
-            if (lMargin <= 0 || tMargin <= 0 || rMargin <= 0 || bMargin <= 0)
+            if(lMargin > (MainWindow.ActualWidth/2)
+                || lMargin < -(MainWindow.ActualWidth/2) 
+                || tMargin < 0
+                || tMargin > MainWindow.ActualHeight)
             {
                 Bounce();
             }
@@ -77,11 +75,13 @@ namespace CsharpPong
 
         private void Bounce()
         {
-            if (bMargin <= 0 || tMargin <= 0)
+            if (tMargin < 0
+                || tMargin > MainWindow.ActualHeight)
             {
                 Direction["topMargin"] = -1 * Direction["topMargin"];
             }
-            if (rMargin <= 0 || lMargin <= 0)
+            if (lMargin > (MainWindow.ActualWidth / 2 )
+                || lMargin < -(MainWindow.ActualWidth / 2 ))
             {
                 Direction["leftMargin"] = -1 * Direction["leftMargin"];
             }
@@ -96,7 +96,7 @@ namespace CsharpPong
 
         public new void ChangeDirection()
         {
-            
+       
         }
     }
 }

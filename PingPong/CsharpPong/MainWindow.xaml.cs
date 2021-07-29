@@ -144,6 +144,7 @@ namespace CsharpPong
         {
             //should pause game
             PopUpMenu.Visibility = Visibility.Visible;
+            ball.halt();
         }
         
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -205,6 +206,7 @@ namespace CsharpPong
         private void NoButton_Click(object sender, RoutedEventArgs e)
         {
             PopUpMenu.Visibility = Visibility.Hidden;
+            ball.restart();
         }
 
         //Actual game control
