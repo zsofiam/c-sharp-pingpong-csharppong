@@ -108,11 +108,6 @@ namespace CsharpPong
             Direction["topMargin"] = 20 * level;
         }
 
-        public void ChangeDirection()
-        {
-            Direction["topMargin"] = -1 * Direction["topMargin"];
-        }
-
         internal bool falls()
         {
             return tMargin > MainWindow.ActualHeight;
@@ -120,11 +115,6 @@ namespace CsharpPong
 
         private bool CollisionHappens()
         {
-
-            //return lMargin == _paddle.VisualRectangle.Margin.Left
-            //    && tMargin + VisualRectangle.Height > MainWindow.Height - _paddle.VisualRectangle.Margin.Bottom
-            //    - _paddle.VisualRectangle.Height;
-
             return tMargin >= MainWindow.ActualHeight - 1.5 * _paddle.VisualRectangle.Height - 2 * VisualRectangle.ActualHeight &&
                      _paddle.VisualRectangle.Margin.Left -2* _paddle.VisualRectangle.Width <= VisualRectangle.Margin.Left &&
                      _paddle.VisualRectangle.Margin.Left + _paddle.VisualRectangle.Width >= VisualRectangle.Margin.Left;
