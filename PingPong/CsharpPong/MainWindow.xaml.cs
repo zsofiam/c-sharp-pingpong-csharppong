@@ -132,7 +132,7 @@ namespace CsharpPong
             }
             else
             {
-                if (e.Key == Key.Space)
+                if ((inGame) && (e.Key == Key.Space))
                 {
                     if (isPaused) resume();
                     else pause();
