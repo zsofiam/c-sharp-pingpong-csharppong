@@ -130,6 +130,14 @@ namespace CsharpPong
                         break;
                 }
             }
+            else
+            {
+                if (e.Key == Key.Space)
+                {
+                    if (isPaused) resume();
+                    else pause();
+                }
+            }
         }
 
         private void HandleEscKey()
