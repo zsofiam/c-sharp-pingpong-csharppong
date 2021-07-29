@@ -7,17 +7,16 @@ using System.Windows;
 
 namespace CsharpPong
 {
-    class Paddle
+    public class Paddle
     {
         private MainWindow MainWindow;
-        private System.Windows.Shapes.Rectangle VisualRectangle;
+        public System.Windows.Shapes.Rectangle VisualRectangle;
 
         public Paddle(MainWindow mainWindow, System.Windows.Shapes.Rectangle visualRectangle)
         {
             MainWindow = mainWindow;
             VisualRectangle = visualRectangle;
         }
-
         public void Move(string direction)
         {
             var lMargin = VisualRectangle.Margin.Left;
