@@ -99,6 +99,12 @@ namespace CsharpPong
                         paddle.Move("right");
                         break;
 
+                    //Manually update the on-screen-info
+                    //Later this HAS TO be moved to the trigger when the ball and the paddle collides!
+                    case Key.G:
+                        updateOnScreenInfo();
+                        break;
+
 
                     case Key.NumPad0:
                         if (DEBUG) play(0);
