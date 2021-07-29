@@ -40,7 +40,7 @@
         <ProgressBar x:Name="ScoreProgressVisual" HorizontalAlignment="Center" Height="20" VerticalAlignment="Bottom" Width="794" Foreground="#CC4ADBEB" BorderBrush="{x:Null}" Background="#CEE6E6E6" LargeChange="0" Value="30" Margin="0,0,0,-3" Visibility="Hidden"/>
         <ProgressBar x:Name="TimeProgressVisual" HorizontalAlignment="Center" Height="15" VerticalAlignment="Bottom" Width="794" Foreground="#CC4AEB5D" BorderBrush="{x:Null}" Background="{x:Null}" LargeChange="0" Value="20" Margin="0,0,0,0"/>
 
-        <TextBlock x:Name="PauseVisual" Visibility="Hidden" HorizontalAlignment="Center" Margin="275,160,268,160" TextWrapping="Wrap" Text="PAUSED" VerticalAlignment="Center" Height="100" Width="251" Foreground="White" FontSize="72" TextDecorations="{x:Null}" FontFamily="Segoe UI Light" TextAlignment="Center"/>
+        <TextBlock x:Name="PauseVisual" Visibility="Hidden" HorizontalAlignment="Center" Margin="275,160,268,160" Text="Press SPACE to continue!" VerticalAlignment="Center" Height="100" Width="600" Foreground="White" FontSize="22" TextDecorations="{x:Null}" FontFamily="Segoe UI Light" TextAlignment="Center"/>
         <Canvas x:Name="StartMenu" HorizontalAlignment="Center" Height="140" Margin="247,142,247,148" VerticalAlignment="Center" Width="300" Background="#b3dae8" Opacity="0.8">
             <Button x:Name="StartButton"  FontSize="18" Content="PLAY" Canvas.Left="75" Canvas.Top="110" Width="150" RenderTransformOrigin="0.293,0.491" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="StartButton_Click">
                 <Button.Background>
