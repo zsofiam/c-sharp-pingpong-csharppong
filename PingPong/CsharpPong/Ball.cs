@@ -108,6 +108,7 @@ namespace CsharpPong
             Direction["topMargin"] = 20 * level;
         }
 
+        //TODO: rename - start with capital letter and verb - variable: noun, css class: noun or melléknév
         internal bool falls()
         {
             return tMargin > MainWindow.ActualHeight;

@@ -1,22 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace CsharpPong
 {
     // This needs some other info like ball speed and stuff
+    //TODO: why struct and not class?
+    //TODO: use access modifiers as they should be used
     struct LevelInfo
     {
         private string _name;
@@ -51,6 +42,7 @@ namespace CsharpPong
     /// </summary>
     public partial class MainWindow : Window
     {
+        //partial class
         private bool _debug = false;
 
         //Classes
@@ -145,7 +137,7 @@ namespace CsharpPong
             PopUpMenu.Visibility = Visibility.Visible;
             _ball.Halt();
         }
-        
+
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ScoreProgressVisual.Width = this.ActualWidth;
@@ -165,13 +157,15 @@ namespace CsharpPong
             _timeSpent++;
             UpdateProgressBars();
 
-            if (_timeSpent >= _levels[_level].GetMaxTime()) {
+            if (_timeSpent >= _levels[_level].GetMaxTime())
+            {
                 _playTimer.Stop();
                 Stop();
                 MessageBox.Show("TIME IS OVER!");
             }
 
-            else if (_score >= _levels[_level].GetRequiredScore()){
+            else if (_score >= _levels[_level].GetRequiredScore())
+            {
                 _playTimer.Stop();
                 Stop();
                 MessageBox.Show($"CONGRATS! You scored {_score}!");
@@ -208,7 +202,7 @@ namespace CsharpPong
             ScoreProgressVisual.Value = _score;
             TimeProgressVisual.Value = _timeSpent;
         }
-        
+
         private void YesButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -221,6 +215,7 @@ namespace CsharpPong
         }
 
         //Actual game control
+        // TODO: name method to explain
         private void Play(int level)
         {
             this._level = level;
@@ -232,6 +227,7 @@ namespace CsharpPong
             UpdateOnScreenInfo();
 
             //Start timer
+            // TODO: could have been a separate method instead of comment - should not leave todo in code
             _playTimer.Interval = new TimeSpan(0, 0, 0, 0, 50);
             _playTimer.Tick += PlayTimer_Tick;
             _playTimer.Start();
@@ -280,9 +276,10 @@ namespace CsharpPong
         }
 
         // Other and things that could get outsourced or have some debuggy purpose
-            //This one is dummy/prototype level code, focus on later moving this to like a config file!!!
+        //This one is dummy/prototype level code, focus on later moving this to like a config file!!!
         private void CreateLevelData()
         {
+            //TODO: magic numbers - separate method
             LevelInfo easy = new LevelInfo("Basic", 5, 1000);
             LevelInfo intermediate = new LevelInfo("Intermediate", 10, 700);
             LevelInfo expert = new LevelInfo("Expert", 20, 400);
@@ -300,18 +297,19 @@ namespace CsharpPong
         {
             if (BasicLevel.IsChecked != null && (bool)BasicLevel.IsChecked)
             {
+                // TODO: refactor magic numbers
                 _level = 1;
-                
+
             }
             else if (IntermediateLevel.IsChecked != null && (bool)IntermediateLevel.IsChecked)
             {
                 _level = 2;
-                
+
             }
             else
             {
                 _level = 3;
-               
+
             }
 
             Play(_level);
